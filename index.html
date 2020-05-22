@@ -149,62 +149,15 @@ for (m=0; m<4; m++) {
 	document.write(heading+by+"<br>"+table);
 }
 
-/*
-for (m=0; m<4; m++) {
-	lastdot=-1;
-	cnt=0;
-	next=10;
-	document.write("<h2 style='padding-left:100px; padding-right:100px'>");
-	lastwhich=-1;
-	which=-1;
-	imgleft=Math.random()<0.5;
-	for (i=0; i<100; i++) {
-	   while (which==lastwhich)
-		   which=Math.floor(Math.random() * words.length);
-	   lastwhich=which;
-	   for (j=0; j<words[which].length; j++) {
-			which2=Math.floor(Math.random() * words[which][j].length);
-			word=words[which][j][which2];
-			
-			if (j==0&& cnt-lastdot>next) {
-				  document.write(".");
-				  if (Math.floor(Math.random() * 4)==0)
-					document.write("<br>");
-				  word=word.charAt(0).toUpperCase() + word.slice(1);
-				  lastdot=cnt;
-				  next=Math.floor(Math.random() * 10)+5;
-			} else if (cnt==0||cnt==4) {
-				  word=word.charAt(0).toUpperCase() + word.slice(1);
-				  lastdot=cnt;
-			}
-			document.write(" "+word);
-			if (cnt==3) {
-				date=new Date().toLocaleString();
-				name=names[0][Math.floor(Math.random() * names[0].length)]+" ";
-				for (k=0; k<3; k++) {
-					name=name+names[1][Math.floor(Math.random() * names[1].length)];
-					if (k<3-1)
-						name=name+"-";
-				}
-				while (imgind==lastimgind)
-					imgind=Math.floor(Math.random() * imgs.length);
-				img=imgs[imgind];
-				lastimgind=imgind;
-				document.write("</h2><font color='#888' style='padding-left:100px; padding-right:100px' > by "+name+" "+date+"</font><br><table style='padding-left:100px; padding-right:100px' width='100%'>");
-				if (imgleft&&Math.random()<0.5){
-				   document.write("<td style=width='20%'><img height='200' src='"+img+"'/></td>");
-			    	document.write("<td style='padding-left:15px'  valign='top'>");
-				}else
-			    	document.write("<td style='padding-right:15px' valign='top'>");
-			}
-			cnt++;
-	   }
-	}
-	document.write(".</td>");
-	if (!imgleft&&Math.random()<0.5)
-		 document.write("<td style=width='20%'><img height='200' src='"+img+"'/></td>");
-	
-	document.write("</table><br>");
-}	*/
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167304720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167304720-1');
 </script>
 </html>
