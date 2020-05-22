@@ -1,0 +1,206 @@
+<html>
+  <style>
+* {
+font-family : Helvetica,Arial,freesans,sans-serif;
+}
+</style>
+<img style='margin-left:100px' src="bbc.png"/>
+<div style=' background-color:#bb1919; height:100px'><br><img style='margin-left:100px;' src="bbc2.png"/></div>
+
+<script>
+imgs=['1 gmvV-FLE49HoyLzwZOJjug.jpeg','C_AB_Rosemary2-900x722.jpg','Femshocked.jpg','GettyImages-1200814511-820x550.jpg','hqdefault.jpg','hqdefaulti.jpg','imageiis.jpg','images.jpg','kiev-ukraine-06232019-lgbt-parade-600w-1499901557.jpg','man-in-a-wig-dressed-as-a-woman-trans-or-transvestite-walking-along-JGT650.jpg','maxresdefault.jpg','maxresdiiefault.jpg','peter-dawes-known-as-piper-44609633.jpg','screenshot-2017-08-10-at-23-32-38.png','tumblr_m61bhpvI431r5k9sbo1_400.jpg','_107772667_mediaitem107772666.jpg'];
+
+firstnames=[
+[
+  ["Lynda","Rhonda","Katlin","Rebecca","Silvia"]
+]
+];
+
+surnames=[
+[
+   ["Smith","Jones","Green","Taylor"],["Brown","Baker","Greer","Brooke"],["Thompson","Baron","Porter","Hargraves"]
+]
+];
+
+startsentence=[
+[
+  ['we must not tolerate','we must end','zero tolerance','there is no room for','society must reject']
+],
+[
+  ['its time we','its important we','society must'],['reject','end','put a stop to']
+],
+ 
+];
+
+
+words=
+[
+ //[ ['we must end','its important','ending','must reject','society must','rights','agenda','community']],
+ [
+   [  'body' , 'gender', 'slut','fat'],['shaming']
+ ], 
+ [
+   ['racial', 'gender', 'sexuality', 'religious'],['diversity', 'equality']
+ ],
+ [['LGBT', 'feminism' ,'homophobia', 'racist'  , 'sexist','sexism', 'homophobic', 'minority',  'sex object', 'climate change', 'environmentalism', 'pale male', 'social justice','mansplaining', 'microagression','white privelege','man spreading','trans','transphobia','tolerance','gay marriage','equal pay','hate speech','incel','glass ceiling','safe space']
+ ], 
+
+ [
+   ['racist', 'rape', 'sexist'],['culture']
+ ],
+ [
+   ['race','religious','gender','reject'],['hate','descrimination']
+ ],
+ [
+    ['reproductive','trans','womens','animal','minority'],['rights']
+ ],
+ [
+   ['transgender'],['games','toilets','community','olympics','education']
+ ]
+
+];
+
+
+function generate_phrase(arr,lastwhich,space)
+{
+	   str='';
+	   which=Math.floor(Math.random() * arr.length);
+	   while (which==lastwhich)
+		   which=Math.floor(Math.random() * arr.length);
+	   
+	   for (j=0; j<arr[which].length; j++) {
+			which2=Math.floor(Math.random() * arr[which][j].length);
+			word=arr[which][j][which2];
+			if (j>0)
+				str=str+space+word;
+			else
+				str=str+word;
+	   }
+	   return {which:which,word:str};
+
+}
+
+function ucap(str)
+{
+   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+
+lastimgind=-1;
+imgind=-1;
+
+for (m=0; m<4; m++) {
+	lastwhich=-1;
+    heading_phrase1=generate_phrase(words, -1," ");
+    heading_phrase2=generate_phrase(words, heading_phrase1.which," ");
+	heading="<h2 style='padding-left:100px; padding-right:100px'>"+ucap(heading_phrase1.word)+" "+heading_phrase2.word+"</h2>";
+	name=generate_phrase(firstnames,-1," ").word+" "+generate_phrase(surnames,-1,"-").word;
+    date=new Date().toLocaleString();
+	by="<font color='#888' style='padding-left:100px; padding-right:100px' > by "+name+" "+date+"</font>";
+	paragraph='';
+	num_sentences=7+Math.floor(Math.random() * 7);
+	for (l=0; l<num_sentences; l++) {
+		// sentences
+		if (l==0)
+			lastwhich=-1;
+		else
+			lastwhich=first_word.lastwhich;
+		first_word=generate_phrase(startsentence, lastwhich," ");
+        sentence=ucap(first_word.word)+" ";
+		num_words=	3+Math.floor(Math.random() * 3);
+		lastwhich=-1;
+		for (i=0; i<num_words; i++) {
+		
+		   next_word=generate_phrase(words, lastwhich," ");
+		   sentence+=next_word.word;
+		   if (i<num_words-1)
+		     sentence+=" ";
+		   else
+		     sentence+=". ";
+		   lastwhich=next_word.which;
+		}
+
+		paragraph+=sentence;
+		if (Math.random()<0.2)
+		   paragraph+="<br>";
+	}
+	imgleft=Math.random()<0.5;
+	useimg=Math.random()<0.5;
+	table="<table style='padding-left:100px; padding-right:100px' width='100%'>";
+	if (useimg) {
+		while (imgind==lastimgind)
+			imgind=Math.floor(Math.random() * imgs.length);
+		img=imgs[imgind];
+		lastimgind=imgind;
+	}
+	if (useimg&&imgleft) {
+		table+="<td width='20%' valign='top'><img height='200' src='"+img+"'/></td>";
+	}
+	table+="<td valign='top'>"+paragraph+"</td>";
+	if (useimg&&!imgleft) {
+		table+="<td width='20%' valign='top'><img height='200' src='"+img+"'/></td>";
+	}
+	table+="</table>";
+	//alert('table'+table);
+	document.write(heading+by+"<br>"+table);
+}
+
+/*
+for (m=0; m<4; m++) {
+	lastdot=-1;
+	cnt=0;
+	next=10;
+	document.write("<h2 style='padding-left:100px; padding-right:100px'>");
+	lastwhich=-1;
+	which=-1;
+	imgleft=Math.random()<0.5;
+	for (i=0; i<100; i++) {
+	   while (which==lastwhich)
+		   which=Math.floor(Math.random() * words.length);
+	   lastwhich=which;
+	   for (j=0; j<words[which].length; j++) {
+			which2=Math.floor(Math.random() * words[which][j].length);
+			word=words[which][j][which2];
+			
+			if (j==0&& cnt-lastdot>next) {
+				  document.write(".");
+				  if (Math.floor(Math.random() * 4)==0)
+					document.write("<br>");
+				  word=word.charAt(0).toUpperCase() + word.slice(1);
+				  lastdot=cnt;
+				  next=Math.floor(Math.random() * 10)+5;
+			} else if (cnt==0||cnt==4) {
+				  word=word.charAt(0).toUpperCase() + word.slice(1);
+				  lastdot=cnt;
+			}
+			document.write(" "+word);
+			if (cnt==3) {
+				date=new Date().toLocaleString();
+				name=names[0][Math.floor(Math.random() * names[0].length)]+" ";
+				for (k=0; k<3; k++) {
+					name=name+names[1][Math.floor(Math.random() * names[1].length)];
+					if (k<3-1)
+						name=name+"-";
+				}
+				while (imgind==lastimgind)
+					imgind=Math.floor(Math.random() * imgs.length);
+				img=imgs[imgind];
+				lastimgind=imgind;
+				document.write("</h2><font color='#888' style='padding-left:100px; padding-right:100px' > by "+name+" "+date+"</font><br><table style='padding-left:100px; padding-right:100px' width='100%'>");
+				if (imgleft&&Math.random()<0.5){
+				   document.write("<td style=width='20%'><img height='200' src='"+img+"'/></td>");
+			    	document.write("<td style='padding-left:15px'  valign='top'>");
+				}else
+			    	document.write("<td style='padding-right:15px' valign='top'>");
+			}
+			cnt++;
+	   }
+	}
+	document.write(".</td>");
+	if (!imgleft&&Math.random()<0.5)
+		 document.write("<td style=width='20%'><img height='200' src='"+img+"'/></td>");
+	
+	document.write("</table><br>");
+}	*/
+</script>
+</html>
